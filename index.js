@@ -43,11 +43,7 @@ nextButton.addEventListener("click", async () => {
   page++;
   pagination.textContent = `${page} / ${maxPage} `;
   cardContainer.innerHTML = "";
-  if (searchQuery === "") {
-    URL = `https://rickandmortyapi.com/api/character/?page=${page}&?name=${searchQuery}`;
-  } else {
-    URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&?page=${page}`;
-  }
+  URL = `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`;
 
   const data = await fetchCharacters();
 
@@ -67,7 +63,7 @@ prevButton.addEventListener("click", async () => {
   pagination.textContent = `${page} / ${maxPage} `;
   cardContainer.innerHTML = "";
 
-  URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&?page=${page}`;
+  URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&page=${page}`;
 
   const data = await fetchCharacters();
 
@@ -89,7 +85,8 @@ searchBar.addEventListener("submit", async (event) => {
   const dataSearch = Object.fromEntries(formData);
   searchQuery = dataSearch.query;
 
-  URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}`;
+  URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&page=${page}`;
+  console.log();
 
   const data = await fetchCharacters();
 
