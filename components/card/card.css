@@ -2,13 +2,35 @@
   margin-bottom: 10px;
 }
 .card {
-  width: 300px;
+  width: var(--width-card);
   background-color: var(--color-secondary);
+  border: 2px solid var(--color-primary);
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
+.card__image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card__image {
+  padding: 20px;
+  width: var(--width-card);
+  border-radius: 10%;
+}
+
+.card__title {
+  color: rgb(110, 167, 35)
+
+}
 .card__info {
   display: grid;
   grid-template-columns: auto 1fr;
+  gap: 5px;
+  border-top: 2px solid var(--color-primary);
+  padding-top:10px;
+  
 }
 .card__content {
   padding: 10px 20px 20px;
