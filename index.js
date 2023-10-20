@@ -15,10 +15,7 @@ const maxPage = 1;
 const page = 1;
 const searchQuery = "";
 
-const card = createCharacterCard();
-cardContainer.append(card);
-
-const URL = "https://rickandmortyapi.com/api/character/[4,5]";
+const URL = "https://rickandmortyapi.com/api/character";
 
 async function fetchCharacters() {
   const response = await fetch(URL);
@@ -32,6 +29,9 @@ async function fetchCharacters() {
 const data = await fetchCharacters();
 console.log(data);
 
-const cardsData = data.map((character) => {
+const cardsData = data.results.map((character) => {
   const { name, image, status, type, episode } = character;
+  
+  const card = createCharacterCard(name, image, status, type, episode);
+  cardContainer.append(card);
 });

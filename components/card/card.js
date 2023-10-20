@@ -1,4 +1,4 @@
-export function createCharacterCard() { 
+export function createCharacterCard(name, image, status, type, episode) { 
     const card = createElementWithClass('li','card');
     const cardImageContainer = createElementWithClass('div','card__image-container');
     const cardImage = createElementWithClass('img','card__image');
@@ -11,16 +11,31 @@ export function createCharacterCard() {
     const cardInfoTitle1 = createElementWithClass('dt','card__info-title');
     const cardInfoTitle2 = createElementWithClass('dt','card__info-title');
     const cardInfoTitle3 = createElementWithClass('dt','card__info-title');
+    // can change text content to be variables
+    cardInfoTitle1.textContent = 'Status'
+    cardInfoTitle2.textContent = 'Type'
+    cardInfoTitle3.textContent = 'Occurences'
 
-    const cardInfoDescription1 = createElementWithClass('dd','card__info-decription');
-    const cardInfoDescription2 = createElementWithClass('dd','card__info-decription');
-    const cardInfoDescription3 = createElementWithClass('dd','card__info-decription');
+    const cardInfoDescription1 = createElementWithClass('dd','card__info-description');
+    const cardInfoDescription2 = createElementWithClass('dd','card__info-description');
+    const cardInfoDescription3 = createElementWithClass('dd','card__info-description');
 
     cardInfo.append(cardInfoTitle1,cardInfoDescription1,cardInfoTitle2,cardInfoDescription2,cardInfoTitle3,cardInfoDescription3)
     cardImageContainer.append(cardImage)
     cardContent.append(cardTitle,cardInfo)
 
     card.append(cardImageContainer, cardContent)
+
+//---- put content in cards:--- 
+    cardImage.src = image
+    cardImage.alt = name
+
+    cardInfoDescription1.textContent = status
+    cardInfoDescription2.textContent = type
+    cardInfoDescription3.textContent = episode.length
+
+    // cardInfo.tit
+
     return card
 }
 function createElementWithClass(type,className) {
