@@ -25,6 +25,7 @@ body {
   font-family: var(--font-family);
   color: var(--color-primary);
   padding: 20px;
+  padding-top: 0px;
   /* center everything: */
   display: flex;
   flex-direction: column;
@@ -38,7 +39,12 @@ main {
 }
 
 .title {
-  padding: 10px 0;
+  padding: 15px 0;
+  background-color: var(--color-navigation);
+  color:  black;
+  width: var(--width-card);
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .error_message {
