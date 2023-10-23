@@ -7,6 +7,7 @@
   border: 2px solid var(--color-primary);
   border-radius: 10px;
   margin-bottom: 20px;
+  animation: cardAnimation 0.5s ease-in-out;
 }
 
 .card__image-container {
@@ -21,16 +22,14 @@
 }
 
 .card__title {
-  color: rgb(110, 167, 35)
-
+  color: rgb(110, 167, 35);
 }
 .card__info {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 5px;
   border-top: 2px solid var(--color-primary);
-  padding-top:10px;
-  
+  padding-top: 10px;
 }
 .card__content {
   padding: 10px 20px 20px;
@@ -44,4 +43,15 @@
 
 li {
   list-style: none;
+}
+
+@keyframes cardAnimation {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
