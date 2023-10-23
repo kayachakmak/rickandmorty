@@ -1,6 +1,7 @@
 .button {
   border: none;
   background-color: var(--color-navigation-buttons);
+  font-size: medium;
 }
 
 .button:hover {

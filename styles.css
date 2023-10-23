@@ -15,6 +15,7 @@
   --color-navigation: lightblue ;
   --color-navigation-buttons: lightblue ;
   --color-navigation-buttons-hover: rgba(128, 0, 128, 0.621);
+  --color-navigation-buttons-text-hover:white;
   --font-family: system-ui;
   --width-card: 300px;
 
@@ -38,4 +39,15 @@ main {
 
 .title {
   padding: 10px 0;
+}
+
+.error_message {
+  font-size: x-large;
+  color: chocolate;
+  padding: 10px;
+  text-align: center;
+}
+
+.error_image {
+  width: 300px;
 }
