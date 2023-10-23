@@ -29,15 +29,12 @@ main.insertAdjacentElement("afterend", navigation);
 navigation.append(prevButton, pagination, nextButton);
 
 // States
-
-let maxPage = 42;
 let page = 1;
 let searchQuery = "";
 
-pagination.textContent = `${page} / ${maxPage} `;
-let URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&?page=${page}`;
 
 async function fetchCharacters() {
+  let URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&page=${page}`;
   const response = await fetch(URL);
   try {
     const data = await response.json();
@@ -49,12 +46,18 @@ async function fetchCharacters() {
 
 const data = await fetchCharacters();
 
-const cardsData = data.results.map((character) => {
+let maxPage = data.info.pages;
+
+
+pagination.textContent = `${page} / ${maxPage} `;
+
+data.results.map((character) => {
   const { name, image, status, type, episode } = character;
 
   const card = createCharacterCard(name, image, status, type, episode);
   cardContainer.append(card);
 });
+
 
 // ---- Next Button ----
 
@@ -65,7 +68,6 @@ nextButton.addEventListener("click", async () => {
   page++;
   pagination.textContent = `${page} / ${maxPage} `;
   cardContainer.innerHTML = "";
-  URL = `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`;
 
   const data = await fetchCharacters();
 
@@ -86,11 +88,9 @@ prevButton.addEventListener("click", async () => {
   pagination.textContent = `${page} / ${maxPage} `;
   cardContainer.innerHTML = "";
 
-  URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&page=${page}`;
-
   const data = await fetchCharacters();
 
-  const cardsData = data.results.map((character) => {
+  data.results.map((character) => {
     const { name, image, status, type, episode } = character;
 
     const card = createCharacterCard(name, image, status, type, episode);
@@ -106,8 +106,6 @@ searchBar.addEventListener("submit", async (event) => {
   const formData = new FormData(event.target);
   const dataSearch = Object.fromEntries(formData);
   searchQuery = dataSearch.query;
-
-  URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&page=${page}`;
 
   const data = await fetchCharacters();
 
@@ -125,7 +123,7 @@ searchBar.addEventListener("submit", async (event) => {
     return cardContainer.append(errorImage, errorMessage);
   }
 
-  const cardsData = data.results.map((character) => {
+  data.results.map((character) => {
     const { name, image, status, type, episode } = character;
 
     const card = createCharacterCard(name, image, status, type, episode);
