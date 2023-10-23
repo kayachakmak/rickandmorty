@@ -32,7 +32,6 @@ navigation.append(prevButton, pagination, nextButton);
 let page = 1;
 let searchQuery = "";
 
-
 async function fetchCharacters() {
   let URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&page=${page}`;
   const response = await fetch(URL);
@@ -45,19 +44,18 @@ async function fetchCharacters() {
 }
 
 const data = await fetchCharacters();
-
+console.log(data);
 let maxPage = data.info.pages;
-
 
 pagination.textContent = `${page} / ${maxPage} `;
 
-data.results.map((character) => {
+data.results.map((character, index) => {
   const { name, image, status, type, episode } = character;
 
-  const card = createCharacterCard(name, image, status, type, episode);
+  const card = createCharacterCard(name, image, status, type, episode, index);
+
   cardContainer.append(card);
 });
-
 
 // ---- Next Button ----
 
@@ -71,10 +69,10 @@ nextButton.addEventListener("click", async () => {
 
   const data = await fetchCharacters();
 
-  const cardsData = data.results.map((character) => {
+  const cardsData = data.results.map((character, index) => {
     const { name, image, status, type, episode } = character;
 
-    const card = createCharacterCard(name, image, status, type, episode);
+    const card = createCharacterCard(name, image, status, type, episode, index);
     cardContainer.append(card);
   });
 });
@@ -90,10 +88,10 @@ prevButton.addEventListener("click", async () => {
 
   const data = await fetchCharacters();
 
-  data.results.map((character) => {
+  data.results.map((character, index) => {
     const { name, image, status, type, episode } = character;
 
-    const card = createCharacterCard(name, image, status, type, episode);
+    const card = createCharacterCard(name, image, status, type, episode, index);
     cardContainer.append(card);
   });
 });
@@ -124,9 +122,9 @@ searchBar.addEventListener("submit", async (event) => {
   }
 
   data.results.map((character) => {
-    const { name, image, status, type, episode } = character;
+    const { name, image, status, type, episode, index } = character;
 
-    const card = createCharacterCard(name, image, status, type, episode);
+    const card = createCharacterCard(name, image, status, type, episode, index);
     cardContainer.append(card);
   });
 

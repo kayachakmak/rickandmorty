@@ -1,4 +1,4 @@
-export function createCharacterCard(name, image, status, type, episode) {
+export function createCharacterCard(name, image, status, type, episode, index) {
   const card = createElementWithClass("li", "card");
   const cardImageContainer = createElementWithClass(
     "div",
@@ -60,8 +60,11 @@ export function createCharacterCard(name, image, status, type, episode) {
   
   cardInfoDescription3.textContent = episode.length;
 
+  card.style.animationDelay = `${0.2 * index}s`;
+
   return card;
 }
+
 function createElementWithClass(type, className) {
   const Element = document.createElement(type);
   Element.className = className;
