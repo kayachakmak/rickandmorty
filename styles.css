@@ -35,3 +35,14 @@ main {
 .title {
   padding: 10px 0;
 }
+
+.error_message {
+  font-size: x-large;
+  color: chocolate;
+  padding: 10px;
+  text-align: center;
+}
+
+.error_image {
+  width: 300px;
+}
