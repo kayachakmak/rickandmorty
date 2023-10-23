@@ -4,7 +4,7 @@
 
 .search-bar {
   padding: 10px 20px;
-  background-color: rgb(236, 236, 160);
+  background-color: var(--color-secondary);
   display: grid;
   grid-template-columns: 1fr 24px;
   border-radius: 5px;
