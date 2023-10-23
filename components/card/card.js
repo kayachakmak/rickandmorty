@@ -51,7 +51,13 @@ export function createCharacterCard(name, image, status, type, episode) {
   cardTitle.textContent = name;
 
   cardInfoDescription1.textContent = status;
+  if (status==='Alive') {cardInfoDescription1.style.color = 'green'}
+  if (status==='Dead') {cardInfoDescription1.style.color = 'darkred'}
+  if (status=='unknown') {cardInfoDescription1.textContent = 'Unknown'}
+
   cardInfoDescription2.textContent = type;
+  if (Boolean(type) === false) { cardInfoDescription2.textContent='WTF?'}
+  
   cardInfoDescription3.textContent = episode.length;
 
   return card;
