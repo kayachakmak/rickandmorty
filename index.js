@@ -8,29 +8,25 @@ const main = document.querySelector('[data-js="main"]');
 
 const searchBar = createSearchBar();
 
-const CardContainer = createElementWithClassAndData(
+const cardContainer = createElementWithClassAndData(
   "ul",
   "card-container",
   "card-container"
 );
-main.append(searchBar, CardContainer);
-const Navigation = createElementWithClassAndData(
+
+const navigation = createElementWithClassAndData(
   "nav",
   "navigation",
   "navigation"
 );
-main.insertAdjacentElement("afterend", Navigation);
 
-const PrevButton = createButton("previous", "button--prev", "button-prev");
-const pagElement = createPagination();
-const NextButton = createButton("next", "button--next", "button-next");
+const prevButton = createButton("previous", "button--prev", "button-prev");
+const pagination = createPagination();
+const nextButton = createButton("next", "button--next", "button-next");
 
-Navigation.append(PrevButton, pagElement, NextButton);
-
-const cardContainer = document.querySelector('[data-js="card-container"]');
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
-const pagination = document.querySelector('[data-js="pagination"]');
+main.append(searchBar, cardContainer);
+main.insertAdjacentElement("afterend", navigation);
+navigation.append(prevButton, pagination, nextButton);
 
 // States
 
@@ -39,7 +35,6 @@ let page = 1;
 let searchQuery = "";
 
 pagination.textContent = `${page} / ${maxPage} `;
-
 let URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&?page=${page}`;
 
 async function fetchCharacters() {
@@ -51,6 +46,7 @@ async function fetchCharacters() {
     console.log(error);
   }
 }
+
 const data = await fetchCharacters();
 
 const cardsData = data.results.map((character) => {
@@ -59,6 +55,8 @@ const cardsData = data.results.map((character) => {
   const card = createCharacterCard(name, image, status, type, episode);
   cardContainer.append(card);
 });
+
+// ---- Next Button ----
 
 nextButton.addEventListener("click", async () => {
   if (page === maxPage) {
@@ -79,6 +77,7 @@ nextButton.addEventListener("click", async () => {
   });
 });
 
+// ---- Previous Button ----
 prevButton.addEventListener("click", async () => {
   if (page === 1) {
     return;
@@ -104,15 +103,27 @@ searchBar.addEventListener("submit", async (event) => {
   page = 1;
   event.preventDefault();
   cardContainer.innerHTML = "";
-
   const formData = new FormData(event.target);
   const dataSearch = Object.fromEntries(formData);
   searchQuery = dataSearch.query;
 
   URL = `https://rickandmortyapi.com/api/character/?name=${searchQuery}&page=${page}`;
-  console.log();
 
   const data = await fetchCharacters();
+
+  if (data.hasOwnProperty("error")) {
+    maxPage = 1;
+    pagination.textContent = `${page} / ${maxPage} `;
+    const errorMessage = document.createElement("div");
+    const errorImage = document.createElement("img");
+    errorImage.src =
+      "./assets/pngtree-hand-drawn-cartoon-scratching-head-showing-yellow-robot-with-404-error-image_1310296.jpg";
+    errorImage.alt = "error image";
+    errorImage.className = "error_image";
+    errorMessage.className = "error_message";
+    errorMessage.textContent = `${data.error}`;
+    return cardContainer.append(errorImage, errorMessage);
+  }
 
   const cardsData = data.results.map((character) => {
     const { name, image, status, type, episode } = character;

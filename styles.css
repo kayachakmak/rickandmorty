@@ -12,8 +12,13 @@
 :root {
   --color-primary: rgb(51, 51, 51);
   --color-secondary: #f6f6f6;
+  --color-navigation: lightblue ;
+  --color-navigation-buttons: lightblue ;
+  --color-navigation-buttons-hover: rgba(128, 0, 128, 0.621);
+  --color-navigation-buttons-text-hover:white;
   --font-family: system-ui;
   --width-card: 300px;
+
 }
 
 body {
@@ -41,4 +46,15 @@ main {
   text-align: center;
   margin-bottom: 10px;
   /* border: 2px solid black; */
+}
+
+.error_message {
+  font-size: x-large;
+  color: chocolate;
+  padding: 10px;
+  text-align: center;
+}
+
+.error_image {
+  width: 300px;
 }

@@ -1,10 +1,10 @@
 import { createElementWithClassAndData } from "../search-bar/search-bar.js";
 
 export function createPagination() {
-  const pagination = createElementWithClassAndData(
+  const Pagination = createElementWithClassAndData(
     "span",
     "navigation__pagination",
     "pagination"
   );
-  return pagination;
+  return Pagination;
 }
